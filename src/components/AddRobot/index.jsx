@@ -5,7 +5,7 @@ import { AddRobotSvgBtn } from '../AddRobotSvgBtn';
 
 export function AddRobot() {
     return (
-        <Shape>
+        <Shape marginBottom={'1rem'}>
             <Container>
             <AddRobotSvgBtn />
             <div>
