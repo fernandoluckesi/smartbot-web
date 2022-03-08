@@ -7,7 +7,8 @@ export const GlobalStyle = createGlobalStyle`
         --green: #00B39D;
 
         --text-title: #343234;
-        --text-body: #969cb3;
+        --text-subtitle: #888689;
+        --text-body: #B1B0B2;
 
         --shape: #ffffff;
     }
@@ -33,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
     }
 
-    body {
+    body, button {
         font-family: 'Roboto', sans-serif;
     }
 

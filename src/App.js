@@ -1,10 +1,9 @@
 import './App.css';
 import {
   Route,
-  Routes
+  Routes,
 } from 'react-router-dom';
 import { General } from './pages/General';
-import { GlobalStyle } from './styles/global';
 
 function App() {
   return (

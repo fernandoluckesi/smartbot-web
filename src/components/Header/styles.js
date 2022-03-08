@@ -3,11 +3,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     align-items: center;
-    background-color: var(--shape);
-    border-radius: 8px;
     display: flex;
-    padding: 1rem 1.6rem;
-
+    
     div {
         background-color: #DFDFDF;
         height: 33px;
