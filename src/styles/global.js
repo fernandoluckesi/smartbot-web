@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
-        --background: #F5F5F5;
+        --background: #E5E5E5;
         --red: #FF4501;
         --green: #00B39D;
 
@@ -50,34 +50,26 @@ export const GlobalStyle = createGlobalStyle`
     .react-modal-overlay {
         align-items: center;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 179, 157, 0.7);
         display: flex;
+        height: 100vh;
         justify-content: center;
         left: 0;
+        min-width: 306px;
         position: fixed;
         right: 0;
         top: 0;
+
+        @media (max-width: 458px) {
+            padding: 0 1rem;
+        }
     }
     
     .react-modal-content {
-        background: var(--background);
-        border-radius: 0.24rem;
-        max-width: 576px;
-        padding: 3rem;
+        background: var(--shape);
+        border-radius: 4px;
+        max-width: 442px;
         position: relative;
         width: 100%;
-    }
-
-    .react-modal-close {
-        background: transparent;
-        border: 0;
-        position: absolute;
-        right: 1.5rem;
-        transition: filter 0.3s;
-        top: 1.5rem;
-
-        &:hover {
-            filter: brightness(0.8);
-        }
     }
 `

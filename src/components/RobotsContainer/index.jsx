@@ -27,10 +27,7 @@ export function RobotsContainer() {
                     )
                 })
             }
-            <NewRobotModal
-                isOpen={isNewRobotModalOpen}
-                onRequestClose={handleCloseNewRobotModalOpen}
-            />
+            <NewRobotModal />
         </Container>
     );
 }

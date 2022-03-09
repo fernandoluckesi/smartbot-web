@@ -36,9 +36,14 @@ export const Container = styled.div`
         margin: 0  0 1.5rem 0;
         width: 100%;
 
-       &:nth-child(2n) {
-            margin-right: 0;
+      
     }
+
+    @media (max-width: 500px) {
+        margin: 0 1rem 1.5rem;
+        width: 100%;
+
+       
     }
 `
 
