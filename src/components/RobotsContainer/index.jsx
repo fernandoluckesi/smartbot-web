@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NewRobotModal } from '../NewRobotModal';
 import { Robot } from '../Robot';
 import { Container } from './styles';
 
@@ -7,14 +8,29 @@ const mocks = [
 ]
 
 export function RobotsContainer() {
-    return(
+    const [isNewRobotModalOpen, setIsNewRobotModalOpen] = useState(false);
+
+    const handleOpenNewRobotModalOpen = () => {
+        setIsNewRobotModalOpen(true);
+    }
+
+    const handleCloseNewRobotModalOpen = () => {
+        setIsNewRobotModalOpen(false);
+    }
+
+    return (
         <Container>
-            <Robot />
-            <Robot />
-            <Robot />
-            <Robot />
-            <Robot />
-            <Robot />
+            {
+                mocks.map(() => {
+                    return (
+                        <Robot />
+                    )
+                })
+            }
+            <NewRobotModal
+                isOpen={isNewRobotModalOpen}
+                onRequestClose={handleCloseNewRobotModalOpen}
+            />
         </Container>
     );
 }
