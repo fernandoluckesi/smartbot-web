@@ -1,5 +1,6 @@
 import React from 'react';
 import { AddRobot } from '../../components/AddRobot';
+import { AlertMessage } from '../../components/AlertMessage';
 import { Header } from '../../components/Header';
 import { Loading } from '../../components/Loading';
 import { Resume } from '../../components/Resume';
@@ -9,7 +10,7 @@ import { Container } from './styles';
 
 export function General() {
 
-    const { isLoadingOverview, isLoadingRobots } = useRobots();
+    const { isLoadingOverview, isLoadingRobots, showAlert } = useRobots();
 
     const navigationTitles = {
         title: 'Análise Geral',
@@ -31,6 +32,11 @@ export function General() {
             <Resume />
             <AddRobot />
             <RobotsContainer />
+            <AlertMessage
+                message={'Robô cadastrado com sucesso'}
+                type={'success'}
+                isOpen={showAlert}
+            />
         </Container>
     )
 }

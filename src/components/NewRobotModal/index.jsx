@@ -18,6 +18,7 @@ import {
 } from './styles';
 import closeBtnImg from '../../assets/close-btn.svg';
 import { InputErrorMsg } from '../InputErrorMsg';
+import { AlertMessage } from '../AlertMessage';
 
 export function NewRobotModal() {
     const { isNewRobotModalOpen, setIsNewRobotModalOpen, createRobot } = useRobots();
@@ -26,6 +27,7 @@ export function NewRobotModal() {
     const [robotStartValue, setRobotStartValue] = useState('');
     const [productNameError, setProductNameError] = useState(false);
     const [robotStartValueError, setRobotStartValueError] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleCreateNewRobot = async (event) => {
         event.preventDefault();
@@ -35,9 +37,10 @@ export function NewRobotModal() {
         if (!productName) setProductNameError(true);
         if (!robotStartValue) setRobotStartValueError(true);
 
-        if(productNameError || robotStartValueError) return;
+        if (productNameError || robotStartValueError) return;
 
-        await createRobot({
+
+        const response = await createRobot({
             title: productName,
             mode: 0,
             strategy_id: strategyId,
@@ -45,8 +48,15 @@ export function NewRobotModal() {
             simulation: 0,
             broker_id: 1
         });
-
-        setIsNewRobotModalOpen(false);
+        console.log('sucesso aqui', response)
+        if (response) {
+            setIsNewRobotModalOpen(false);
+        } else {
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 8000);
+        }
     }
 
     const handleCloseNewRobotModalOpen = () => {
@@ -88,6 +98,11 @@ export function NewRobotModal() {
             overlayClassName="react-modal-overlay"
             className="react-modal-content"
         >
+            <AlertMessage
+                message={'Erro ao cadastrar o robô. Tente novamente.'}
+                type={'error'}
+                isOpen={showAlert}
+            />
             <Container onSubmit={handleCreateNewRobot}>
                 <BtnCloseModal
                     onClick={handleCloseNewRobotModalOpen}

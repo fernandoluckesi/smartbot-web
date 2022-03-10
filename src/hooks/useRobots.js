@@ -9,6 +9,7 @@ export function RobotsProvider(props) {
     const [isNewRobotModalOpen, setIsNewRobotModalOpen] = useState(false);
     const [isLoadingOverview, setIsLoadingOverview] = useState(false);
     const [isLoadingRobots, setIsLoadingRobots] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
     const requestsGetOverview = () => {
         setIsLoadingOverview(true);
@@ -20,7 +21,7 @@ export function RobotsProvider(props) {
             })
             .catch(error => error);
     };
-    
+
     const requestsGetRobot = () => {
         setIsLoadingRobots(true);
 
@@ -38,9 +39,13 @@ export function RobotsProvider(props) {
                 ...robotInput,
             });
             requestsGetRobot();
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 8000);
             return response;
         } catch (error) {
-            return 'Erro ao criar o robô'
+            return false;
         }
     }
 
@@ -59,6 +64,7 @@ export function RobotsProvider(props) {
                 isLoadingOverview,
                 isLoadingRobots,
                 createRobot,
+                showAlert,
             }}
         >
             {props.children}
