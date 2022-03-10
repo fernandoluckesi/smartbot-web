@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRobots } from '../../hooks/useRobots';
 import { Shape } from '../Shape';
 import {
     Container,
@@ -10,106 +11,41 @@ import {
     TransactionsTotal
 } from './styles';
 
-const papers = [
-    {
-        paper: 'WING20',
-        traders: 157,
-    },
-    {
-        paper: 'ABEV3',
-        traders: 215,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'WING20',
-        traders: 157,
-    },
-    {
-        paper: 'ABEV3',
-        traders: 215,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'WING20',
-        traders: 157,
-    },
-    {
-        paper: 'ABEV3',
-        traders: 215,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'WING20',
-        traders: 157,
-    },
-    {
-        paper: 'ABEV3',
-        traders: 215,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-    {
-        paper: 'BOVA11',
-        traders: 71,
-    },
-];
-
 export function Resume() {
+    const { overview } = useRobots();
+    console.log(overview)
 
-    const resumeValue = -220;
-    const transactionsTotal = 443;
     return (
         <Shape marginBottom={'1rem'}>
             <Container>
                 <h2>Resumo geral operações</h2>
                 <SubtitleContainer>
-                    <ResumeValue>
+                    <ResumeValue
+                        valueType={overview.moviment_summary < 0 ? 'negative' : 'positive'}
+                    >
                         <TextResume>Resumo de movimentação</TextResume>
                         <strong>
                             {new Intl.NumberFormat('pt-BR', {
                                 style: 'currency',
                                 currency: 'BRL'
-                            }).format(resumeValue)}
+                            }).format(overview.moviment_summary)}
                         </strong>
                     </ResumeValue>
                     <TransactionsTotal>
                         <TextResume>Total de transações realizadas</TextResume>
-                        <strong>{transactionsTotal}</strong>
+                        <strong>{overview.transactions}</strong>
                     </TransactionsTotal>
                 </SubtitleContainer>
                 <hr />
                 <TextResume>Papéis negociados</TextResume>
                 <NegotiatedPapersContainer>
-                    {
-                        papers.map((item) => {
+                   {
+                        overview.papers?.map((paper, index) => {
                             return (
-                                <NegotiatedPaper>
-                                    <p>{item.paper}</p>
+                                <NegotiatedPaper key={index}>
+                                    <p>{paper.name}</p>
                                     <div></div>
-                                    <p>{item.traders}</p>
+                                    <p>{paper.trasactions}</p>
                                     <TextResume>transações</TextResume>
                                 </NegotiatedPaper>
                             )

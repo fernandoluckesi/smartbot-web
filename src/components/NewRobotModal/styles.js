@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
     background-color: var(--shape);
     border-radius: 4px;
     padding: 1rem 2rem;
@@ -27,7 +27,7 @@ export const Header = styled.header`
             font-weight: 500;
             margin-bottom: 1.5rem;
 
-            @media (max-width: 458px) {
+            @media (max-width: 360px) {
                 margin-bottom: 0.75rem;
             }
         }
@@ -41,6 +41,10 @@ export const Header = styled.header`
     h1 {
         color: #5F5D60;
         margin-bottom: 5px;
+
+        @media (max-width: 360px) {
+            font-size: 1.7rem;
+        }
     }
 
 `
@@ -48,35 +52,41 @@ export const Header = styled.header`
 export const Inputs = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
 `
+
 
 export const LabelStyled = styled.label`
     color: var(--text-title);
     font-size: 12px;
     margin-bottom: 8px;
+    margin-top: 16px;
 `
 
 export const InputStyled = styled.input`
     border: 1px solid #E3E2E3;
     border-radius: 2px;
-    margin-bottom: 16px;
     padding: 14px;
-
+    
     ::placeholder {
         color: var(--text-subtitle);
         font-size: 12px;
     }
 `
 
+export const ExampleInput = styled.p`
+    color: var(--text-subtitle);
+    font-size: 12px;
+    margin-top: 4px;
+`
 export const StrategyTypesContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 40px;
 
-    @media (max-width: 458px) {
-            margin-top: 0.75rem;
-        }
+    @media (max-width: 360px) {
+        margin-top: 1.5rem;
+    }
 `
 
 export const StrategyTypesTitle = styled.p`
@@ -84,7 +94,7 @@ export const StrategyTypesTitle = styled.p`
     font-weight: 500;
     margin-bottom: 1.5rem;
 
-    @media (max-width: 458px) {
+    @media (max-width: 360px) {
         margin-bottom: 1rem;
     }
 `
@@ -99,7 +109,13 @@ export const StrategyButton = styled.button`
     padding: 1.5rem;
     text-align: start;
 
-    @media (max-width: 458px) {
+    transition: filter 0.4s;
+
+    &:hover {
+        filter: ${props => !props.isActive ? 'brightness(0.6)' : ''}; 
+    }
+
+    @media (max-width: 360px) {
         padding: 1rem 1.5rem;
     }
 `
@@ -109,7 +125,7 @@ export const ActionsButtonsContainer = styled.div`
     justify-content: space-between;
     margin: 36px 0 20px;
 
-    @media (max-width: 458px) {
+    @media (max-width: 360px) {
         margin: 18px 0 10px;
     }
 `
@@ -120,7 +136,12 @@ export const CancelButton = styled.button`
     border-radius: 2px;
     color: #6A6C72;
     font-size: 12px;
-    padding: 0.5rem 1rem; 
+    padding: 0.5rem 1rem;
+    transition: filter 0.4s;
+
+    &:hover {
+        filter: brightness(0.7);
+    }
 `
 
 export const CreateRobotButton = styled.button`
@@ -131,4 +152,9 @@ export const CreateRobotButton = styled.button`
     font-size: 12px;
     font-weight: 500;
     padding: 0.5rem 1rem;
+    transition: filter 0.4s;
+
+    &:hover {
+        filter: brightness(0.9);
+    }
 `

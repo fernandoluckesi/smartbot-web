@@ -4,12 +4,15 @@ import {
   Routes,
 } from 'react-router-dom';
 import { General } from './pages/General';
+import { RobotsProvider } from './hooks/useRobots';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/general" element={<General />} />
-    </Routes>
+    <RobotsProvider>
+      <Routes>
+        <Route path="/general" element={<General />} />
+      </Routes>
+    </RobotsProvider>
   );
 }
 

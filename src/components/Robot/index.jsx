@@ -7,53 +7,75 @@ import {
     Tags,
     TextTag,
     RobotPaperInfos,
-    PaperNumber,
+    PaperPosition,
     PaperName,
     PaperValues,
     DailyBalance,
     DailyTrades,
 } from './styles';
 
-import arrowSolidImg from '../../assets/arrow-solid.svg';
+import arrowSolidUpImg from '../../assets/arrow-solid-up.svg';
+import arrowSolidDownImg from '../../assets/arrow-solid-down.svg';
 import arrowOutlineImg from '../../assets/arrow-outline.svg';
 
 const dailyBalanceValue = -220;
 
-export function Robot() {
+export function Robot({ dataRobot }) {
     return (
         <Container>
-            <RobotTitle>Título do Robô</RobotTitle>
-            <RobotId>#1792301</RobotId>
+            <RobotTitle>{dataRobot.title}</RobotTitle>
+            <RobotId>#{dataRobot.id}</RobotId>
             <Tags>
                 <TextTag>
-                    Pessimista
+                    {dataRobot.type}
                 </TextTag>
                 <TextTag>
-                    WIN%
+                    {dataRobot.stock_codes}
                 </TextTag>
                 <TextTag>
-                    Price action
+                    {dataRobot.strategy}
                 </TextTag>
             </Tags>
-            <Status>
+            <Status isRunning={dataRobot.running === 1}>
                 <span>&#8226;</span>
-                Em execução
+                {dataRobot.running === 1 ? 'Em execução' : 'Parado'}
             </Status>
             <RobotPaperInfos>
-                <PaperNumber>30</PaperNumber>
+                <PaperPosition>
+                    {dataRobot.last_paper ? dataRobot.last_paper.position : '#'}
+                </PaperPosition>
                 <PaperName>
-                    <p>WING20</p>
-                    <p>Compra</p>
-                </PaperName>
-                <PaperValues>
-                    <p>114.093.33</p>
                     <p>
-                        <img src={arrowSolidImg} alt="seta verde para cima" />
-                        R$92,33
+                        {dataRobot.last_paper ? dataRobot.last_paper.paper : '#'}
+                    </p>
+                    <p>
+                        {dataRobot.last_paper?.type === 0 && 'Venda'}
+                        {dataRobot.last_paper?.type === 1 && 'Compra'}
+                    </p>
+                </PaperName>
+                <PaperValues
+                    valueType={
+                        (dataRobot.last_paper?.profit < 0 && 'negative') ||
+                        (dataRobot.last_paper?.profit >= 0 && 'positive')
+                    }
+                >
+                    <p>
+                        {dataRobot.last_paper ? dataRobot.last_paper.paper_value : '#'}
+                    </p>
+                    <p>
+                        <img
+                            src={dataRobot.last_paper?.profit >= 0 ? arrowSolidUpImg : arrowSolidDownImg}
+                            alt="seta verde para cima" />
+                        {new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }).format(dataRobot.last_paper?.profit || 0)}
                     </p>
                 </PaperValues>
             </RobotPaperInfos>
-            <DailyBalance>
+            <DailyBalance
+                valueType={dataRobot.daily_balance > 0 ? 'positive' : 'negative'}
+            >
                 <p>
                     Saldo diário
                     <img src={arrowOutlineImg} alt="seta para baixo" />
@@ -62,12 +84,12 @@ export function Robot() {
                     {new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(dailyBalanceValue)}
+                    }).format(dataRobot.daily_balance)}
                 </p>
             </DailyBalance>
             <DailyTrades>
                 <p>Trades no dia</p>
-                <p>7</p>
+                <p>{dataRobot.number_trades}</p>
             </DailyTrades>
         </Container>
     )

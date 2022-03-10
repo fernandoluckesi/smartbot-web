@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRobots } from '../../hooks/useRobots';
 import { NewRobotModal } from '../NewRobotModal';
 import { Robot } from '../Robot';
 import { Container } from './styles';
@@ -8,22 +9,15 @@ const mocks = [
 ]
 
 export function RobotsContainer() {
-    const [isNewRobotModalOpen, setIsNewRobotModalOpen] = useState(false);
 
-    const handleOpenNewRobotModalOpen = () => {
-        setIsNewRobotModalOpen(true);
-    }
-
-    const handleCloseNewRobotModalOpen = () => {
-        setIsNewRobotModalOpen(false);
-    }
+    const { robots } = useRobots();
 
     return (
         <Container>
             {
-                mocks.map(() => {
+                robots.map((robot) => {
                     return (
-                        <Robot />
+                        <Robot key={robot.id} dataRobot={robot} />
                     )
                 })
             }

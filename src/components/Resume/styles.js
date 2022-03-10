@@ -34,7 +34,7 @@ export const ResumeValue = styled.div`
     }
 
     strong {
-        color: var(--red);
+        color: ${props => props.valueType === 'negative' ? 'var(--red)' : 'var(--green)'};
         font-size: 1.25rem;
     }
 

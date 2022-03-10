@@ -50,7 +50,9 @@ export const Container = styled.div`
 export const RobotTitle = styled.p`
     color: var(--text-title);
     font-weight: 700;
+    height: 54px;
     margin-bottom: 0.25rem;
+    max-width: 50%;
 `
 
 export const Status = styled.p`
@@ -63,7 +65,7 @@ export const Status = styled.p`
     top: 1rem;
 
     span {
-        color: var(--green);
+        color: ${props => props.isRunning ? 'var(--green)' : 'var(--red)'}  ;
         display: block;
         font-size: 32px;
         line-height: 8px;
@@ -99,7 +101,7 @@ export const RobotPaperInfos = styled.div`
     padding: 0.5rem 1rem;
 `
 
-export const PaperNumber = styled.p`
+export const PaperPosition = styled.p`
     color: #5F5D60;
     font-size: 2rem;
     font-weight: 700;
@@ -130,7 +132,7 @@ export const PaperValues = styled.div`
 
         &:nth-child(2) {
             align-items: center;
-            color: var(--green);
+            color: ${props => props.valueType === 'positive' ? 'var(--green)' : 'var(--red)'};
             display: flex;
             font-size: 14px;
             line-height: 20px;
@@ -156,7 +158,7 @@ export const DailyBalance = styled.div`
         }
 
         &:nth-child(2) {
-            color: var(--red);
+            color: ${props => props.valueType === 'positive' ? 'var(--green)' : 'var(--red)'};
             font-size: 20px;
             font-weight: 700;
             margin-top: 4px;
