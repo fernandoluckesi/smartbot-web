@@ -44,7 +44,9 @@ export function NewRobotModal() {
             initial_capital: robotStartValue,
             simulation: 0,
             broker_id: 1
-        })
+        });
+
+        setIsNewRobotModalOpen(false);
     }
 
     const handleCloseNewRobotModalOpen = () => {
